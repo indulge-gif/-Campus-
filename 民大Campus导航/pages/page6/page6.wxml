@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="header">
+  
+  <view class="title-container">
+    <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/中央民族大学logo.png" class="title-badge" />
+    
+    <view class="title-group">
+      <text class="main-title">{{locationName}}</text>
+      <text class="subtitle">详情信息</text>
+    </view>
+    
+    <view class="title-line"></view>
+  </view>
+</view>
+
+  <image 
+    src="{{image}}" 
+    class="detail-image" 
+    mode="widthFix" 
+    wx:if="{{image}}"
+  />
+
+  <view class="detail-card">
+    <view class="description" wx:if="{{description}}">
+      <text>{{description}}</text>
+    </view>
+
+    <view class="info-item">
+      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/distance.png" class="info-icon" />
+      <text>当前距离：{{distance}}米</text>
+    </view>
+    <view class="info-item">
+      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/time.png" class="info-icon" />
+      <text>预计时间：步行约{{Math.round(distance/80)}}分钟</text>
+    </view>
+
+    <button class="nav-button" bindtap="showRoute">开始导航</button>
+  </view>
+</view>

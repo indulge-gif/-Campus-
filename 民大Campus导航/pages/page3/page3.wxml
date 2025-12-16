@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 轮播图区域 -->
+  <swiper class="swiper-box" autoplay="true" interval="3000" circular="true">
+    <swiper-item wx:for="{{swiperImages}}" wx:key="index">
+      <image src="{{item}}" class="swiper-image" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 校园概况内容 -->
+  <view class="content-section">
+    <text class="section-title">学校简介</text>
+    <text class="section-text">
+      中央民族大学是国家民委、教育部、北京市共建高校。学校前身为1941年成立的延安民族学院。新中国成立后，经中央政府批准，1951年在北京成立中央民族学院，1993年11月更名为中央民族大学；1999年、2004年学校先后进入国家“211工程”和“985工程”；2017年进入“双一流”建设A类高校行列。
+
+    党和国家历届领导集体始终非常关心和重视中央民族大学的建设和发展。毛泽东、邓小平等老一辈党和国家领导人先后17次接见学校师生代表。2009年，习近平同志在视察学校工作时指出：<text class="bold-text">“中央民族大学在我国高等教育体系和民族团结进步事业中具有重要地位，为国家的民族团结进步事业，为民族地区经济社会文化建设作出了重要贡献。”</text>经过70多年的发展建设和几代人的不懈努力，学校已经成为践行政治立校的重要高地、铸牢中华民族共同体意识的重要阵地、培养各民族优秀人才的重要基地、民族理论政策研究的重要基地、传承和弘扬中华优秀传统文化的重要基地。建校以来，学校为国家输送了20万余名各民族毕业生。学校现有海淀、丰台、海南三校区，建成了“一校三址”办学格局。
+
+　　当前，全校师生员工深入学习贯彻习近平新时代中国特色社会主义思想和党的二十大精神，特别是习近平总书记关于加强和改进民族工作的重要思想，以铸牢中华民族共同体意识为主线，全面推进实施质量立校、人才强校、特色兴校、管理强校和开放办校五大战略，以改革创新精神和攻坚克难的勇气，奋力推进“双一流”建设，开启学校发展新征程、开创学校事业新局面。
+    </text>
+  </view>
+
+  <view class="content-section">
+    <text class="section-title">特色建筑</text>
+    <view class="feature-list">
+      <view class="feature-item">
+        <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/campus.jpg" class="feature-image" />
+        <text class="feature-name">教学科研楼</text>
+      </view>
+      <view class="feature-item">
+        <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/lib.jpg" class="feature-image" />
+        <text class="feature-name">图书馆</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系信息 -->
+  <view class="contact-section">
+    <text class="section-title">联系我们</text>
+    <text class="contact-info">地址：北京市丰台区王佐镇魏各庄路27号</text>
+    <text class="contact-info">电话：010-68932442</text>
+  </view>
+</view>

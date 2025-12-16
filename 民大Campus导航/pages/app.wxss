@@ -1,0 +1,53 @@
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  background: #f8f9fa;
+}
+
+/* 统一按钮样式 */
+.button {
+  background: #fff;
+  border: 1px solid #dc143c;
+  color: #dc143c;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.button:active {
+  background: #dc143c;
+  color: white;
+  transform: scale(0.98);
+}
+
+/* 搜索栏升级 */
+.search-bar {
+  background: white;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 12px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+}
+image{
+  height: 30px;
+  width: 33px;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* 地图容器 */
+map {
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

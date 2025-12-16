@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="topbar">
+    <view class="title-name">中央民族大学（丰台校区）校内导航</view>
+  </view>
+
+  <view class="main-body">
+    <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/中央民族大学logo (2).png" class="logo" />
+    <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/封面.png" class="cover" />
+    
+    <view class="action-container">
+      <button class="enter-btn" bindtap="navigateToHome">立即进入校园</button>
+      <view class="countdown">{{countdownText}}</view>
+    </view>
+  </view>
+</view>

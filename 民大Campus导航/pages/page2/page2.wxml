@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="header">
+    <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/中央民族大学logo.png" class="school-logo" />
+    <view class="title-group">
+      <text class="main-title">校园地点导航</text>
+      <text class="subtitle">点击地点查看详情｜当前校区：丰台</text>
+    </view>
+  </view> 
+  <map
+  id="map"
+  longitude="116.111"
+  latitude="39.810"
+  style="width: 100%; height: 400px"
+  markers="{{markers}}" 
+  bindmarkertap="onMarkerTap"
+></map>
+
+
+  <view class="location-list">
+    <view 
+      wx:for="{{locations}}" 
+      wx:key="id" 
+      class="location-item"
+      bindtap="toPage6" 
+      data-id="{{item.id}}"
+    >
+      <view class="location-name" bindtap="showDetail" data-id="{{item.id}}">
+        {{item.name}}
+        <text class="detail-hint">点击查看详情</text>
+      </view>
+      <text class="distance">距离约{{item.distance}}米</text>
+    </view>
+  </view>
+</view> 

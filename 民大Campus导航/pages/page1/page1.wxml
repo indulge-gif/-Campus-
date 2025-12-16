@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="header">
+    <text class="title">中央民族大学</text>
+    <text class="subtitle">丰台校区校园导航</text>
+  </view>
+
+  <view class="search-bar">
+<input 
+  placeholder="输入地点名称（如：图书馆）" 
+  value="{{searchQuery}}" 
+  bindinput="onSearchInput" 
+  placeholder-class="placeholder-style"
+/>
+  <view class="search-button" bindtap="toPage4">
+    <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/search.png" class="icon" />
+    <text>搜索</text>
+    </view>
+  </view>
+  <map 
+  id="map"
+  longitude="{{schoolLocation.longitude}}"
+  latitude="{{schoolLocation.latitude}}"
+  scale="15"
+  style="width: 100%; height: 400px"
+  markers="{{markers}}"
+  bindmarkertap="onMarkerTap"
+  enable-scroll="false"
+  enable-zoom="false"
+></map>
+
+
+  <view class="button-grid">
+    <view class="button-icon" bindtap="toPage3">
+      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/info.png" class="icon-lg" />
+      <text>校园概况</text>
+    </view>
+    <view class="button-icon" bindtap="navigateToSchool">
+      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/navigation.png" class="icon-lg" />
+      <text>一键导航</text>
+    </view>
+    <view class="button-icon" bindtap="toPage2">
+      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/more.png" class="icon-lg" />
+      <text>更多</text>
+    </view>
+  </view>
+</view>

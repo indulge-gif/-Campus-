@@ -1,4 +1,0 @@
-<view class="container">
-  <view class="button" bindtap="toPage6">地点A</view>
-  <view class="button" bindtap="toPage6">地点B</view>
-</view>

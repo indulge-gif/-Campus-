@@ -1,0 +1,77 @@
+/* 轮播图样式 */
+.swiper-box {
+  width: 100%;
+  height: 400rpx;
+  margin-top: 20rpx;
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+
+/* 内容区块通用样式 */
+.content-section {
+  margin: 32rpx;
+  padding: 24rpx;
+  background: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.08);
+}
+
+.section-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #dc143c;
+  margin-bottom: 24rpx;
+}
+
+.section-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+.bold-text{
+  font-weight: 1000;
+}
+
+/* 特色建筑列表 */
+.feature-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.feature-item {
+  width: 48%;
+  text-align: center;
+}
+
+.feature-image {
+  width: 100%;
+  height: 200rpx;
+  border-radius: 12rpx;
+}
+
+.feature-name {
+  display: block;
+  font-size: 28rpx;
+  margin-top: 12rpx;
+}
+
+/* 联系信息 */
+.contact-section {
+  margin: 32rpx;
+  padding: 24rpx;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+}
+
+.contact-info {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin: 16rpx 0;
+}

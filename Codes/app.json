@@ -1,1 +1,27 @@
-
+{
+"pages": [
+  "pages/splash/splash",
+  "pages/home/home",
+  "pages/locations/locations",
+  "pages/about/about",
+  "pages/advancedSearch/advancedSearch",
+  "pages/detail/detail"
+],
+"window": {
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#dc143c",
+  "navigationBarTitleText": "中央民族大学",
+  "navigationBarTextStyle": "white"
+},
+  "plugins": {
+    "leafletwx": {
+      "version": "1.0.21",
+      "provider": "wx3fe0bd34d4615f50"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于导航功能"
+    }
+  }
+}

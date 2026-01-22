@@ -5,6 +5,9 @@
       <text class="main-title">校园地点导航</text>
       <text class="subtitle">点击地点查看详情｜当前校区：丰台</text>
     </view>
+    <view class="header-actions">
+      <view class="header-action" bindtap="toAdvancedSearch">高级搜索</view>
+    </view>
   </view> 
   <map
   id="map"

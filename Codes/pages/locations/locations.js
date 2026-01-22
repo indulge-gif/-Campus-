@@ -93,5 +93,9 @@ Page({
     wx.navigateTo({
       url: `/pages/detail/detail?location=${encodeURIComponent(JSON.stringify(location))}`
     });
+  },
+
+  toAdvancedSearch() {
+    wx.navigateTo({ url: '/pages/advancedSearch/advancedSearch' });
   }
 });

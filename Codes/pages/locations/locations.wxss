@@ -18,6 +18,19 @@
   flex: 1;
 }
 
+.header-actions {
+  margin-left: 16rpx;
+}
+
+.header-action {
+  padding: 14rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.95);
+  font-size: 24rpx;
+  border: 1rpx solid rgba(255,255,255,0.25);
+}
+
 .main-title {
   font-size: 36rpx;
   color: white;

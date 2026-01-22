@@ -1,3 +1,21 @@
+.header {
+  padding: 28rpx 32rpx 8rpx;
+}
+
+.header-title {
+  font-size: 40rpx;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
 .search-box {
   background: white;
   border-radius: 24rpx;
@@ -5,6 +23,7 @@
   margin-top: 32rpx;
   display: flex;
   align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.08);
 }
 
 .search-icon {
@@ -16,6 +35,76 @@
 .advanced-input {
   flex: 1;
   font-size: 28rpx;
+}
+
+.search-btn {
+  margin-left: 16rpx;
+  padding: 14rpx 20rpx;
+  border-radius: 12rpx;
+  background: #dc143c;
+  color: #fff;
+  font-size: 26rpx;
+}
+
+.container {
+  position: relative;
+  padding-bottom: 120rpx;
+}
+
+.search-suggestions {
+  position: fixed;
+  left: 32rpx;
+  right: 32rpx;
+  top: 240rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 12rpx 28rpx rgba(0,0,0,0.18);
+  z-index: 99;
+  max-height: 560rpx;
+  overflow-y: auto;
+}
+
+.suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.suggestions-title {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.suggestions-close {
+  font-size: 26rpx;
+  color: #dc143c;
+}
+
+.suggestion-item {
+  padding: 18rpx 20rpx;
+  border-bottom: 1rpx solid #f6f6f6;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-name {
+  display: block;
+  font-size: 30rpx;
+  color: #222;
+  font-weight: 600;
+}
+
+.suggestion-sub {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #888;
+  line-height: 1.4;
 }
 
 .search-history {

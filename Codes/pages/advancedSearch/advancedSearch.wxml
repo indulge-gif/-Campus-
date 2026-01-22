@@ -1,24 +1,46 @@
 <view class="container">
   <view class="header">
-    <text>高级路线搜索</text>
+    <text class="header-title">高级路线搜索</text>
     <text class="subtitle">输入特征点优化路线</text>
   </view>
 
   <view class="search-box">
     <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/search.png" class="search-icon" />
     <input 
-      placeholder="输入建筑特征（如：红色屋顶、钟楼等）"
+      placeholder="输入地点关键词（如：日新、图书馆、餐厅）"
       placeholder-class="placeholder-style"
       class="advanced-input"
+      value="{{searchQuery}}"
+      bindinput="onSearchInput"
+      bindconfirm="onSearchTap"
+      confirm-type="search"
     />
+    <view class="search-btn" bindtap="onSearchTap">搜索</view>
+  </view>
+
+  <view class="search-suggestions" wx:if="{{suggestionsVisible}}">
+    <view class="suggestions-header">
+      <text class="suggestions-title">搜索结果（{{suggestions.length}}）</text>
+      <text class="suggestions-close" bindtap="hideSuggestions">收起</text>
+    </view>
+    <view
+      wx:for="{{suggestions}}"
+      wx:key="id"
+      class="suggestion-item"
+      bindtap="onSuggestionTap"
+      data-id="{{item.id}}"
+    >
+      <text class="suggestion-name">{{item.name}}</text>
+      <text class="suggestion-sub" wx:if="{{item.sub}}">{{item.sub}}</text>
+    </view>
   </view>
 
   <view class="search-history">
     <text class="section-title">历史搜索</text>
     <view class="tag-list">
-      <view class="tag">体育馆附近</view>
-      <view class="tag">图书馆周边</view>
-      <view class="tag">餐饮区域</view>
+      <view class="tag" bindtap="onTagTap" data-query="体育">体育馆附近</view>
+      <view class="tag" bindtap="onTagTap" data-query="图书馆">图书馆周边</view>
+      <view class="tag" bindtap="onTagTap" data-query="餐厅">餐饮区域</view>
     </view>
   </view>
 </view>

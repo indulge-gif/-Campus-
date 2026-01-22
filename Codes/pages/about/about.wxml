@@ -23,7 +23,7 @@
     <view class="feature-list">
       <view class="feature-item">
         <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/campus.jpg" class="feature-image" />
-        <text class="feature-name">教学科研楼</text>
+        <text class="feature-name">综合楼</text>
       </view>
       <view class="feature-item">
         <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/lib.jpg" class="feature-image" />

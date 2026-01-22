@@ -18,6 +18,11 @@
   margin-top: 4px;
 }
 
+.container {
+  position: relative;
+  padding-bottom: 120rpx;
+}
+
 .search-bar {
   background: white;
   border-radius: 16rpx;
@@ -35,9 +40,71 @@
   font-size: 28rpx;
 }
 
+.search-suggestions {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  top: 230rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 12rpx 28rpx rgba(0,0,0,0.18);
+  z-index: 99;
+  max-height: 560rpx;
+  overflow-y: auto;
+}
+
+.suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.suggestions-title {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.suggestions-close {
+  font-size: 26rpx;
+  color: #dc143c;
+}
+
+.suggestion-item {
+  padding: 18rpx 20rpx;
+  border-bottom: 1rpx solid #f6f6f6;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-name {
+  display: block;
+  font-size: 30rpx;
+  color: #222;
+  font-weight: 600;
+}
+
+.suggestion-sub {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #888;
+  line-height: 1.4;
+}
+
 .icon {
   width: 40rpx;
   height: 40rpx;
+}
+
+.map-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .button-grid {

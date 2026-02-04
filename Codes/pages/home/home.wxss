@@ -1,21 +1,41 @@
 .header {
-  background: linear-gradient(135deg, #dc143c, #a01030);
-  padding: 20px;
-  border-radius: 0 0 16px 16px;
+  position: relative;
+  background: linear-gradient(135deg, #c3122e, #e94a5a);
+  padding: 28rpx 32rpx;
+  border-radius: 0 0 20rpx 20rpx;
+  min-height: 140rpx;
+  overflow: hidden;
+}
+
+.banner-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08), transparent 45%),
+    radial-gradient(circle at 80% 40%, rgba(255,255,255,0.07), transparent 42%);
+  opacity: 0.6;
+}
+
+.header-text {
+  position: relative;
+  z-index: 1;
 }
 
 .title {
   display: block;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .subtitle {
   display: block;
-  color: rgba(255,255,255,0.9);
-  font-size: 14px;
-  margin-top: 4px;
+  color: rgba(255,255,255,0.92);
+  font-size: 26rpx;
+  margin-top: 8rpx;
 }
 
 .container {
@@ -24,20 +44,54 @@
 }
 
 .search-bar {
-  background: white;
-  border-radius: 16rpx;
-  padding: 20rpx;
-  margin: 24rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx 24rpx;
+  margin: 20rpx 0 12rpx;
   display: flex;
   align-items: center;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  gap: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.08);
 }
 
 .search-bar input {
   flex: 1;
   border: none;
-  padding: 0 20rpx;
+  padding: 0 12rpx;
+  font-size: 30rpx;
+}
+
+.search-btn {
+  background: #c3122e;
+  color: #fff;
+  border-radius: 16rpx;
+  padding: 0 28rpx;
+  height: 72rpx;
+  line-height: 72rpx;
   font-size: 28rpx;
+  box-shadow: 0 8rpx 16rpx rgba(195,18,46,0.24);
+}
+
+.quick-tags {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+  margin: 0 0 12rpx;
+}
+
+.tag {
+  padding: 12rpx 20rpx;
+  border: 1rpx solid #e8e8e8;
+  border-radius: 999rpx;
+  color: #444;
+  font-size: 26rpx;
+  background: #fff;
+}
+
+.hint {
+  font-size: 24rpx;
+  color: #888;
+  margin: 4rpx 4rpx 16rpx;
 }
 
 .search-suggestions {
@@ -103,8 +157,77 @@
 
 .map-wrapper {
   position: relative;
-  border-radius: 12px;
+  border-radius: 16rpx;
   overflow: hidden;
+  box-shadow: 0 8rpx 22rpx rgba(0,0,0,0.12);
+}
+
+.map-fab-group {
+  position: absolute;
+  right: 20rpx;
+  bottom: 120rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  z-index: 5;
+}
+
+.fab {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  color: #c3122e;
+  font-size: 24rpx;
+  box-shadow: 0 10rpx 26rpx rgba(0,0,0,0.15);
+}
+
+.map-tip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12rpx 20rpx;
+  background: rgba(248,248,248,0.95);
+  font-size: 24rpx;
+  color: #555;
+  z-index: 4;
+}
+
+.poi-card {
+  position: fixed;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 40rpx;
+  background: #f7f7f7;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 10rpx 28rpx rgba(0,0,0,0.12);
+  z-index: 99;
+  transform: translateY(8rpx);
+  opacity: 0;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.poi-card.slide-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.poi-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #222;
+}
+
+.poi-meta {
+  margin-top: 6rpx;
+  color: #666;
+  font-size: 24rpx;
+}
+
+.link {
+  color: #c3122e;
 }
 
 .button-grid {
@@ -115,9 +238,9 @@
 }
 
 .button-icon {
-  background: white;
+  background: #fff;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }

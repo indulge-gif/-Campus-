@@ -1,0 +1,11 @@
+<view class="entry-page">
+  <image class="bg" src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/封面.png" mode="aspectFill" />
+  <view class="overlay"></view>
+  <view class="content">
+    <view class="titles">
+      <text class="headline">欢迎来到中央民族大学（丰台校区）</text>
+      <text class="subhead">校园导航 · 学习服务</text>
+    </view>
+    <button class="cta" bindtap="enterApp">进入校园</button>
+  </view>
+</view>

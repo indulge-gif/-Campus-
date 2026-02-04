@@ -1,32 +1,51 @@
 Page({
   data: {
-    countdownText: '5秒后自动进入',
-    timer: null
+    countdownText: '4秒后自动进入',
+    timer: null,
+    seconds: 4
   },
 
   onLoad() {
     this.startCountdown()
   },
 
+  onUnload() {
+    this.clearTimer()
+  },
+
+  onHide() {
+    this.clearTimer()
+  },
+
   startCountdown() {
-    let seconds = 5
-    this.setData({ countdownText: `${seconds}秒后自动进入` })
-    
+    this.clearTimer()
+    let count = this.data.seconds
+    this.setData({ seconds: count, countdownText: `${count}秒后自动进入` })
+
     this.data.timer = setInterval(() => {
-      seconds--
-      this.setData({ countdownText: `${seconds}秒后自动进入` })
-      
-      if (seconds <= 0) {
-        clearInterval(this.data.timer)
-        this.navigateToHome()
+      count -= 1
+      this.setData({ seconds: count, countdownText: `${count}秒后自动进入` })
+
+      if (count <= 0) {
+        this.clearTimer()
+        wx.nextTick(() => {
+          this.navigateToHome()
+        })
       }
     }, 1000)
   },
 
   navigateToHome() {
-    clearInterval(this.data.timer)
-    wx.redirectTo({
+    this.clearTimer()
+    wx.reLaunch({
       url: '/pages/home/home'
     })
+  },
+
+  clearTimer() {
+    if (this.data.timer) {
+      clearInterval(this.data.timer)
+      this.setData({ timer: null })
+    }
   }
 })

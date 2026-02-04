@@ -20,8 +20,8 @@ function computeMatchScore(queryRaw, location) {
   const query = normalizeText(queryRaw);
   if (!query) return null;
 
-  const name = normalizeText(location?.name);
-  const desc = normalizeText(location?.description);
+  const name = normalizeText(location && location.name);
+  const desc = normalizeText(location && location.description);
   const haystack = name + "|" + desc;
   if (!haystack) return null;
 

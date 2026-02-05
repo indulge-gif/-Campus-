@@ -6,7 +6,6 @@
     <view class="texts">
       <text class="welcome-line">欢迎来到</text>
       <text class="school-line">中央民族大学（丰台校区）</text>
-      <text class="subhead">校园导航</text>
     </view>
     <view class="actions">
       <button class="cta" bindtap="navigateToHome" hover-class="cta-active">进入校园</button>

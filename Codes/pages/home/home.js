@@ -1,5 +1,8 @@
 const { locations: LOCATION_SOURCE } = require('../../utils/locations.js');
 
+const DEFAULT_MARKER_SIZE = 28;
+const DEFAULT_MARKER_ICON = 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/marker.png';
+
 function haversineMeters(lat1, lon1, lat2, lon2) {
   const toRad = (d) => (d * Math.PI) / 180;
   const R = 6371000;
@@ -65,6 +68,45 @@ function buildSuggestions(query, locations, limit = 8) {
   });
 }
 
+function normalizeMarker(source) {
+  const markerPart = source.marker || {};
+  const width = source.width || markerPart.width || DEFAULT_MARKER_SIZE;
+  const height = source.height || markerPart.height || DEFAULT_MARKER_SIZE;
+  const iconPath = source.iconPath || markerPart.iconPath || DEFAULT_MARKER_ICON;
+  return {
+    ...source,
+    id: Number(source.id),
+    iconPath,
+    width,
+    height,
+    callout: markerPart.callout || source.callout,
+  };
+}
+
+function buildMarkers(locations, schoolLocation) {
+  const campusMarker = normalizeMarker({
+    id: 0,
+    latitude: schoolLocation.latitude,
+    longitude: schoolLocation.longitude,
+    title: '中央民族大学',
+  });
+
+  const locMarkers = (locations || [])
+    .filter((loc) => loc && loc.latitude != null && loc.longitude != null)
+    .map((loc) => normalizeMarker({
+      id: loc.id,
+      latitude: loc.latitude,
+      longitude: loc.longitude,
+      title: loc.name,
+      iconPath: loc.iconPath,
+      width: loc.width,
+      height: loc.height,
+      marker: loc.marker,
+    }));
+
+  return [campusMarker, ...locMarkers];
+}
+
 Page({
   // 页面初始化
   data: {
@@ -76,20 +118,15 @@ Page({
     poiCard: { visible: false, name: "", distance: "", anim: "" },
     currentTargetLocation: null,
     schoolLocation: {
-      longitude:116.111,
-      latitude:39.810
-    },
-    markers: [{
-      id: 1,
-      latitude: 39.810,
       longitude: 116.111,
-      title: "中央民族大学",
-      width: 30,
-      height: 30
-    }]
+      latitude: 39.810
+    },
+    markers: []
   },
   onLoad() {
     this.mapCtx = wx.createMapContext('map');
+    const markers = buildMarkers(LOCATION_SOURCE, this.data.schoolLocation);
+    this.setData({ markers });
   },
 
   // 定位与权限处理

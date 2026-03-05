@@ -1,9 +1,19 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f6f7f9;
+  position: relative;
+}
+
 .header {
   position: relative;
-  background: linear-gradient(135deg, #c3122e, #e94a5a);
-  padding: 28rpx 32rpx;
-  border-radius: 0 0 20rpx 20rpx;
-  min-height: 140rpx;
+  background: linear-gradient(180deg, #b80f2e 0%, #d82c45 60%, #e95b6a 100%);
+  padding: 24rpx 28rpx;
+  border-radius: 0 0 24rpx 24rpx;
+  min-height: 160rpx;
+  max-height: 240rpx;
   overflow: hidden;
 }
 
@@ -38,71 +48,39 @@
   margin-top: 8rpx;
 }
 
-.container {
+.search-card {
   position: relative;
-  padding-bottom: 120rpx;
+  margin: -48rpx 28rpx 8rpx 28rpx;
+  z-index: 8;
 }
 
-.search-bar {
-  background: #fff;
-  border-radius: 20rpx;
-  padding: 20rpx 24rpx;
-  margin: 20rpx 0 12rpx;
+.search-inner {
   display: flex;
   align-items: center;
-  gap: 16rpx;
-  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.08);
+  gap: 14rpx;
+  background: rgba(255,255,255,0.96);
+  border-radius: 36rpx;
+  padding: 18rpx 22rpx;
+  box-shadow: 0 12rpx 30rpx rgba(0,0,0,0.12);
+  backdrop-filter: blur(6px);
 }
 
-.search-bar input {
+.search-inner input {
   flex: 1;
   border: none;
-  padding: 0 12rpx;
   font-size: 30rpx;
-}
-
-.search-btn {
-  background: #c3122e;
-  color: #fff;
-  border-radius: 16rpx;
-  padding: 0 28rpx;
-  height: 72rpx;
-  line-height: 72rpx;
-  font-size: 28rpx;
-  box-shadow: 0 8rpx 16rpx rgba(195,18,46,0.24);
-}
-
-.quick-tags {
-  display: flex;
-  gap: 12rpx;
-  flex-wrap: wrap;
-  margin: 0 0 12rpx;
-}
-
-.tag {
-  padding: 12rpx 20rpx;
-  border: 1rpx solid #e8e8e8;
-  border-radius: 999rpx;
-  color: #444;
-  font-size: 26rpx;
-  background: #fff;
-}
-
-.hint {
-  font-size: 24rpx;
-  color: #888;
-  margin: 4rpx 4rpx 16rpx;
+  color: #222;
 }
 
 .search-suggestions {
   position: fixed;
-  left: 24rpx;
-  right: 24rpx;
-  top: 230rpx;
+  left: 28rpx;
+  right: 28rpx;
+  top: 180rpx;
   background: #fff;
-  border-radius: 16rpx;
+  border-radius: 18rpx;
   overflow: hidden;
-  box-shadow: 0 12rpx 28rpx rgba(0,0,0,0.18);
+  box-shadow: 0 14rpx 32rpx rgba(0,0,0,0.18);
   z-index: 99;
   max-height: 560rpx;
   overflow-y: auto;
@@ -155,50 +133,61 @@
   height: 40rpx;
 }
 
-.map-wrapper {
+.map-layer {
   position: relative;
-  border-radius: 16rpx;
+  flex: 1;
+  min-height: 0;
+  margin: 10rpx 12rpx 0;
+  border-radius: 22rpx;
   overflow: hidden;
-  box-shadow: 0 8rpx 22rpx rgba(0,0,0,0.12);
+  box-shadow: 0 10rpx 26rpx rgba(0,0,0,0.12);
+  height: calc(100vh - 320rpx);
+  min-height: 70vh;
+}
+
+.map-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 70vh;
 }
 
 .map-fab-group {
   position: absolute;
   right: 20rpx;
-  bottom: 120rpx;
+  bottom: 200rpx;
   display: flex;
   flex-direction: column;
-  gap: 12rpx;
-  z-index: 5;
+  gap: 18rpx;
+  z-index: 6;
 }
 
 .fab {
-  width: 96rpx;
-  height: 96rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.86);
   color: #c3122e;
   font-size: 24rpx;
-  box-shadow: 0 10rpx 26rpx rgba(0,0,0,0.15);
+  box-shadow: 0 12rpx 30rpx rgba(0,0,0,0.18);
+  backdrop-filter: blur(12px);
 }
 
-.map-tip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 12rpx 20rpx;
-  background: rgba(248,248,248,0.95);
-  font-size: 24rpx;
-  color: #555;
-  z-index: 4;
+.fab-primary {
+  background: rgba(231,50,78,0.92);
+  color: #fff;
+  box-shadow: 0 14rpx 34rpx rgba(231,50,78,0.28);
 }
 
 .poi-card {
   position: fixed;
-  left: 20rpx;
-  right: 20rpx;
-  bottom: 40rpx;
+  left: 28rpx;
+  right: 28rpx;
+  bottom: 220rpx;
   background: #f7f7f7;
   border-radius: 20rpx;
   padding: 20rpx;
@@ -214,45 +203,105 @@
   opacity: 1;
 }
 
-.poi-name {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: #222;
-}
-
-.poi-meta {
-  margin-top: 6rpx;
-  color: #666;
-  font-size: 24rpx;
-}
-
-.link {
-  color: #c3122e;
-}
-
-.button-grid {
+.floating-nav {
+  position: absolute;
+  left: 32rpx;
+  right: 32rpx;
+  bottom: 32rpx;
+  padding: 16rpx 18rpx;
+  background: rgba(255,255,255,0.94);
+  border-radius: 28rpx;
+  box-shadow: 0 14rpx 32rpx rgba(0,0,0,0.16);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10rpx;
+  z-index: 6;
+  backdrop-filter: blur(10px);
 }
 
-.button-icon {
-  background: #fff;
-  padding: 12px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  color: #2a2a2a;
+  font-size: 24rpx;
+  transition: transform 120ms ease, color 120ms ease;
 }
 
-.button-icon image {
-  width: 56px;
-  height: 40px;
-  margin-bottom: 8px;
+.nav-item:active {
+  transform: scale(0.97);
+  color: #b80f2e;
 }
 
-.button-icon text {
-  display: block;
-  font-size: 12px;
-  color: #333;
+.nav-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  border: 2rpx solid rgba(184,15,46,0.9);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.nav-icon::before,
+.nav-icon::after {
+  content: "";
+  position: absolute;
+  background: rgba(184,15,46,0.9);
+}
+
+.nav-icon.campus::before {
+  left: 16rpx;
+  right: 16rpx;
+  bottom: 14rpx;
+  height: 24rpx;
+  border: 2rpx solid rgba(184,15,46,0.9);
+  border-radius: 8rpx;
+  background: transparent;
+}
+
+.nav-icon.campus::after {
+  left: 26rpx;
+  top: 12rpx;
+  width: 12rpx;
+  height: 10rpx;
+  border-left: 2rpx solid rgba(184,15,46,0.9);
+  border-top: 2rpx solid rgba(184,15,46,0.9);
+  border-right: 2rpx solid rgba(184,15,46,0.9);
+}
+
+.nav-icon.route::before {
+  left: 20rpx;
+  top: 18rpx;
+  width: 24rpx;
+  height: 4rpx;
+  border-radius: 4rpx;
+}
+
+.nav-icon.route::after {
+  right: 20rpx;
+  bottom: 18rpx;
+  width: 14rpx;
+  height: 14rpx;
+  border: 2rpx solid rgba(184,15,46,0.9);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.nav-icon.pin::before {
+  left: 26rpx;
+  top: 10rpx;
+  width: 12rpx;
+  height: 18rpx;
+  border: 2rpx solid rgba(184,15,46,0.9);
+  border-radius: 12rpx 12rpx 10rpx 10rpx;
+  background: transparent;
+}
+
+.nav-icon.pin::after {
+  left: 30rpx;
+  top: 16rpx;
+  width: 4rpx;
+  height: 4rpx;
+  border-radius: 50%;
 }

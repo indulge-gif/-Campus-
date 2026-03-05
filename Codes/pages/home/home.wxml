@@ -7,25 +7,56 @@
     </view>
   </view>
 
-  <view class="search-bar">
-    <input
-      placeholder="搜索教学楼 / 宿舍 / 食堂"
-      value="{{searchQuery}}"
-      bindinput="onSearchInput"
-      bindconfirm="onSearchTap"
-      bindfocus="onSearchFocus"
-      placeholder-class="placeholder-style"
-      confirm-type="search"
-    />
-    <button class="search-btn" bindtap="onSearchTap">搜索</button>
+  <view class="search-card" bindtap="onSearchTap">
+    <view class="search-inner">
+      <icon type="search" size="18" color="#c3122e"></icon>
+      <input
+        placeholder="搜索 教学楼 / 宿舍 / 食堂"
+        value="{{searchQuery}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchTap"
+        bindfocus="onSearchFocus"
+        placeholder-class="placeholder-style"
+        confirm-type="search"
+      />
+    </view>
   </view>
-  <view class="quick-tags">
-    <view class="tag" data-key="图书馆" bindtap="onQuickTag">图书馆</view>
-    <view class="tag" data-key="食堂" bindtap="onQuickTag">食堂</view>
-    <view class="tag" data-key="宿舍" bindtap="onQuickTag">宿舍</view>
-    <view class="tag" data-key="教学楼" bindtap="onQuickTag">教学楼</view>
+
+  <view class="map-layer">
+    <map
+      id="map"
+      longitude="{{schoolLocation.longitude}}"
+      latitude="{{schoolLocation.latitude}}"
+      scale="15"
+      class="map-canvas"
+      markers="{{markers}}"
+      bindmarkertap="onMarkerTap"
+      bindpoitap="onPoiTap"
+      show-location="true"
+      enable-scroll="false"
+      enable-zoom="false"
+    ></map>
+
+    <view class="map-fab-group">
+      <button class="fab" bindtap="onLocateMe">回到我的位置</button>
+      <button class="fab fab-primary" bindtap="onStartNav">开始导航</button>
+    </view>
+
+    <view class="floating-nav">
+      <view class="nav-item" bindtap="toAbout">
+        <view class="nav-icon campus"></view>
+        <text>校园概况</text>
+      </view>
+      <view class="nav-item" bindtap="navigateToSchool">
+        <view class="nav-icon route"></view>
+        <text>路线导航</text>
+      </view>
+      <view class="nav-item" bindtap="toLocations">
+        <view class="nav-icon pin"></view>
+        <text>常用地点</text>
+      </view>
+    </view>
   </view>
-  <view class="hint">支持校内主要建筑导航</view>
 
   <view class="search-suggestions" wx:if="{{suggestionsVisible}}">
     <view class="suggestions-header">
@@ -43,45 +74,9 @@
       <text class="suggestion-sub" wx:if="{{item.sub}}">{{item.sub}}</text>
     </view>
   </view>
-  <view class="map-wrapper">
-    <map 
-      id="map"
-      longitude="{{schoolLocation.longitude}}"
-      latitude="{{schoolLocation.latitude}}"
-      scale="15"
-      style="width: 100%; height: 400px"
-      markers="{{markers}}"
-      bindmarkertap="onMarkerTap"
-      bindpoitap="onPoiTap"
-      show-location="true"
-      enable-scroll="false"
-      enable-zoom="false"
-    ></map>
-    <view class="map-fab-group">
-      <button class="fab" bindtap="onLocateMe">回到我的位置</button>
-      <button class="fab" bindtap="onStartNav">开始导航</button>
-    </view>
-    <view class="map-tip">当前校区：丰台校区 · 点击地图建筑即可开始导航</view>
-  </view>
 
   <view class="poi-card {{poiCard.anim}}" wx:if="{{poiCard.visible}}">
     <view class="poi-name">{{poiCard.name}}</view>
     <view class="poi-meta">{{poiCard.distance}} · <text class="link" bindtap="onStartNav">导航</text></view>
-  </view>
-
-
-  <view class="button-grid">
-    <view class="button-icon" bindtap="toAbout">
-      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/info.png" class="icon-lg" />
-      <text>校园概况</text>
-    </view>
-    <view class="button-icon" bindtap="navigateToSchool">
-      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/navigation.png" class="icon-lg" />
-      <text>路线导航</text>
-    </view>
-    <view class="button-icon" bindtap="toLocations">
-      <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/more.png" class="icon-lg" />
-      <text>常用地点</text>
-    </view>
   </view>
 </view>

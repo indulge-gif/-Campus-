@@ -109,3 +109,41 @@
   border-bottom: 1rpx solid #eee;
   margin-bottom: 20rpx;
 }
+
+.floor-plan-card {
+  margin-bottom: 24rpx;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  background: #fff8f9;
+  border: 1rpx solid #f5d2d8;
+}
+
+.floor-plan-title {
+  display: block;
+  font-size: 30rpx;
+  color: #a01030;
+  font-weight: 600;
+}
+
+.floor-plan-sub {
+  display: block;
+  margin-top: 8rpx;
+  margin-bottom: 16rpx;
+  font-size: 26rpx;
+  color: #444;
+}
+
+.floor-plan-image {
+  width: 100%;
+  border-radius: 12rpx;
+  border: 1rpx solid #f0e3e6;
+  background: #fff;
+}
+
+.floor-plan-hint {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.5;
+}

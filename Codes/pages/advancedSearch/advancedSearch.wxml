@@ -7,7 +7,7 @@
   <view class="search-box">
     <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/search.png" class="search-icon" />
     <input 
-      placeholder="输入地点关键词（如：日新、图书馆、餐厅）"
+      placeholder="输入地点或教室号（如：图书馆、博文403、403）"
       placeholder-class="placeholder-style"
       class="advanced-input"
       value="{{searchQuery}}"

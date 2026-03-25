@@ -1,4 +1,5 @@
 const { locations: LOCATION_SOURCE } = require('../../utils/locations.js');
+const { buildClassroomSuggestions, mergeSuggestions } = require('../../utils/classroomSearch.js');
 
 const DEFAULT_MARKER_SIZE = 28;
 const DEFAULT_MARKER_ICON = 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/marker.png';
@@ -154,7 +155,9 @@ Page({
     this.setData({ isSearching: true });
     wx.showLoading({ title: "搜索中", mask: true });
 
-    const suggestions = buildSuggestions(query, this.data.locations, 20);
+    const normalSuggestions = buildSuggestions(query, this.data.locations, 20);
+    const classroomSuggestions = buildClassroomSuggestions(query, this.data.locations);
+    const suggestions = mergeSuggestions(classroomSuggestions, normalSuggestions, 20);
     wx.hideLoading();
     this.setData({ isSearching: false });
 
@@ -199,7 +202,7 @@ Page({
 
   onSuggestionTap(e) {
     const id = e.currentTarget.dataset.id;
-    const picked = (this.data.suggestions || []).find((x) => x.id === id);
+    const picked = (this.data.suggestions || []).find((x) => String(x.id) === String(id));
     if (!picked) return;
     this.setData({ suggestionsVisible: false, currentTargetLocation: picked, poiCard: { visible: false, name: "", distance: "", anim: "" } });
     wx.navigateTo({

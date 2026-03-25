@@ -1,4 +1,5 @@
 const { locations: LOCATION_SOURCE } = require('../../utils/locations.js');
+const { buildClassroomSuggestions, mergeSuggestions } = require('../../utils/classroomSearch.js');
 
 function normalizeText(value) {
   return String(value || "")
@@ -86,7 +87,9 @@ Page({
       wx.showToast({ title: '请输入地点名称', icon: 'none' });
       return;
     }
-    const suggestions = buildSuggestions(query, this.data.locations, 10);
+    const normalSuggestions = buildSuggestions(query, this.data.locations, 10);
+    const classroomSuggestions = buildClassroomSuggestions(query, this.data.locations);
+    const suggestions = mergeSuggestions(classroomSuggestions, normalSuggestions, 10);
     if (suggestions.length === 0) {
       this.setData({ suggestions: [], suggestionsVisible: false });
       wx.showToast({ title: '未找到相关地点', icon: 'none' });
@@ -108,7 +111,7 @@ Page({
 
   onSuggestionTap(e) {
     const id = e.currentTarget.dataset.id;
-    const picked = (this.data.suggestions || []).find((x) => x.id === id);
+    const picked = (this.data.suggestions || []).find((x) => String(x.id) === String(id));
     if (!picked) return;
     this.setData({ suggestionsVisible: false });
     wx.navigateTo({

@@ -11,13 +11,27 @@ function haversineMeters(lat1, lon1, lat2, lon2) {
   return Math.round(R * c);
 }
 
+function isDevtoolsEnv() {
+  try {
+    const info = wx.getSystemInfoSync();
+    return info && info.platform === 'devtools';
+  } catch (e) {
+    return false;
+  }
+}
+
 Page({
   data: {
     locationName: "",
     image: "",
     description: "",
-    distance: 0,
-    walkMinutes: 0,
+    buildingKey: "",
+    floor: null,
+    roomNo: "",
+    floorPlanImage: "",
+    floorPlanHint: "",
+    distance: null,
+    walkMinutes: null,
     startLat: null,
     startLng: null,
     endLat: null,
@@ -35,51 +49,33 @@ Page({
         locationName: dest.name || "",
         image: dest.image || "",
         description: dest.description || "",
+        buildingKey: dest.buildingKey || "",
+        floor: dest.floor || null,
+        roomNo: dest.roomNo || "",
+        floorPlanImage: dest.floorPlanImage || "",
+        floorPlanHint: dest.floorPlanHint || "",
         endLat: dest.latitude,
         endLng: dest.longitude,
       });
     }
-    this.fetchUserLocationAndDistance();
+    this.tryUpdateDistanceSilent();
   },
 
-  fetchUserLocationAndDistance() {
-    wx.getSetting({
-      success: (res) => {
-        const authorized = res.authSetting && res.authSetting['scope.userLocation'];
-        const getLoc = () => {
-          wx.getLocation({
-            type: 'gcj02',
-            success: ({ latitude, longitude }) => {
-              this.setData({ startLat: latitude, startLng: longitude });
-              if (this.data.endLat != null && this.data.endLng != null) {
-                const d = haversineMeters(latitude, longitude, this.data.endLat, this.data.endLng);
-                this.setData({ distance: d, walkMinutes: Math.round(d / 80) });
-              }
-            },
-            fail: () => {
-              wx.showToast({ title: '定位失败，请在设置中授权', icon: 'none' });
-            }
-          });
-        };
-        if (authorized) {
-          getLoc();
-        } else {
-          wx.authorize({
-            scope: 'scope.userLocation',
-            success: getLoc,
-            fail: () => {
-              wx.showModal({
-                title: '需要位置信息',
-                content: '用于计算距离与导航，请前往设置开启定位权限。',
-                confirmText: '去设置',
-                success: (res2) => {
-                  if (res2.confirm) wx.openSetting();
-                }
-              });
-            }
-          });
-        }
-      }
+  updateDistanceAndTime() {
+    const { startLat, startLng, endLat, endLng } = this.data;
+    if (startLat == null || startLng == null || endLat == null || endLng == null) return;
+    const d = haversineMeters(startLat, startLng, endLat, endLng);
+    this.setData({ distance: d, walkMinutes: Math.round(d / 80) });
+  },
+
+  tryUpdateDistanceSilent() {
+    wx.getLocation({
+      type: 'gcj02',
+      success: ({ latitude, longitude }) => {
+        this.setData({ startLat: latitude, startLng: longitude });
+        this.updateDistanceAndTime();
+      },
+      fail: () => {},
     });
   },
 
@@ -89,12 +85,23 @@ Page({
       return;
     }
 
-    // 直接使用系统地图，避免依赖路线规划插件
-    wx.openLocation({
-      latitude: this.data.endLat,
-      longitude: this.data.endLng,
-      name: this.data.locationName || '目的地',
-      scale: 16
+    if (!isDevtoolsEnv()) {
+      wx.openLocation({
+        latitude: this.data.endLat,
+        longitude: this.data.endLng,
+        name: this.data.locationName || '目的地',
+        scale: 16
+      });
+      return;
+    }
+
+    const coordText = `${this.data.endLat},${this.data.endLng}`;
+    wx.setClipboardData({ data: coordText });
+    wx.showModal({
+      title: '开发者工具不支持外部地图',
+      content: `当前在 devtools 环境，无法直接拉起地图。\n已复制目的地坐标：${coordText}`,
+      showCancel: false,
+      confirmText: '知道了'
     });
   }
 });

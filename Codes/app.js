@@ -13,5 +13,13 @@ App({
   },
   globalData: {
     cloudPrefix: CLOUD_FILE_PREFIX,
+    mapKeys: {
+      gaode: "ef15e430697f81b1520454fbb132a999",
+      tencent: "",
+    },
+    routePlan: {
+      key: "",
+      referer: "民大Campus导航",
+    },
   },
 });

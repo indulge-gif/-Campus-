@@ -25,15 +25,29 @@
       <text>{{description}}</text>
     </view>
 
+    <view class="floor-plan-card" wx:if="{{floorPlanImage || floorPlanHint}}">
+      <text class="floor-plan-title">楼层平面图</text>
+      <text class="floor-plan-sub" wx:if="{{buildingKey && floor}}">{{buildingKey}} {{floor}}层 {{roomNo}}号教室</text>
+      <image
+        wx:if="{{floorPlanImage}}"
+        src="{{floorPlanImage}}"
+        class="floor-plan-image"
+        mode="widthFix"
+      />
+      <text class="floor-plan-hint" wx:if="{{floorPlanHint}}">{{floorPlanHint}}</text>
+    </view>
+
     <view class="info-item">
       <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/distance.png" class="info-icon" />
-      <text>当前距离：{{distance}}米</text>
+      <text wx:if="{{distance !== null}}">当前距离：{{distance}}米</text>
+      <text wx:else>当前距离：暂不可用</text>
     </view>
     <view class="info-item">
       <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/time.png" class="info-icon" />
-      <text>预计时间：步行约{{walkMinutes}}分钟</text>
+      <text wx:if="{{walkMinutes !== null}}">预计时间：步行约{{walkMinutes}}分钟</text>
+      <text wx:else>预计时间：暂不可用</text>
     </view>
 
-    <button class="nav-button" bindtap="showRoute">开始导航</button>
+    <button class="nav-button" bindtap="showRoute">从当前位置导航</button>
   </view>
 </view>

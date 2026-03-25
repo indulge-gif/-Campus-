@@ -11,7 +11,7 @@
     <view class="search-inner">
       <icon type="search" size="18" color="#c3122e"></icon>
       <input
-        placeholder="搜索 教学楼 / 宿舍 / 食堂"
+        placeholder="搜索地点或教室号（如：日新302）"
         value="{{searchQuery}}"
         bindinput="onSearchInput"
         bindconfirm="onSearchTap"

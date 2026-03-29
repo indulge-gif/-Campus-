@@ -1,0 +1,146 @@
+.page {
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.sub {
+  margin-top: 8rpx;
+  margin-bottom: 18rpx;
+  color: #6b7280;
+  font-size: 24rpx;
+}
+
+.picker-row {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.picker-item {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 12rpx;
+  padding: 10rpx 12rpx;
+  background: #ffffff;
+}
+
+.picker-label {
+  display: block;
+  font-size: 22rpx;
+  color: #6b7280;
+  margin-bottom: 6rpx;
+}
+
+.picker-value {
+  font-size: 26rpx;
+  color: #111827;
+  font-weight: 600;
+}
+
+.image-stage {
+  position: relative;
+  width: 100%;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.floorplan-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.marker-canvas {
+  z-index: 2;
+}
+
+.coord-card {
+  margin-top: 16rpx;
+  padding: 14rpx 16rpx;
+  border-radius: 12rpx;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  font-size: 24rpx;
+  color: #111827;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.btn {
+  margin-top: 12rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+}
+
+.primary {
+  background: #dc143c;
+  color: #fff;
+}
+
+.success {
+  background: #059669;
+  color: #fff;
+}
+
+.warn {
+  background: #ef4444;
+  color: #fff;
+}
+
+.wifi-list {
+  margin-top: 20rpx;
+  border: 1px solid #e5e7eb;
+  border-radius: 12rpx;
+  padding: 14rpx;
+}
+
+.wifi-head {
+  font-size: 26rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.wifi-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 8rpx 0;
+}
+
+.bssid {
+  color: #111827;
+  font-size: 23rpx;
+}
+
+.rssi {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 23rpx;
+}
+
+.empty {
+  color: #9ca3af;
+  font-size: 23rpx;
+}
+
+.footer {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #111827;
+}

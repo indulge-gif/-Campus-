@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="title">WiFi指纹采集 - {{buildingLabel}}</view>
+  <view class="sub">楼层：{{floorLabel}} | 点击平面图选点并采集</view>
+
+  <view class="picker-row">
+    <view class="picker-item">
+      <text class="picker-label">教学楼</text>
+      <picker mode="selector" range="{{buildingOptions}}" value="{{buildingIndex}}" bindchange="onBuildingChange">
+        <view class="picker-value">{{buildingOptions[buildingIndex]}}</view>
+      </picker>
+    </view>
+    <view class="picker-item">
+      <text class="picker-label">楼层</text>
+      <picker mode="selector" range="{{floorOptions}}" value="{{floorIndex}}" bindchange="onFloorChange">
+        <view class="picker-value">{{floorOptions[floorIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="image-stage" style="height: {{canvasHeight}}px;" wx:if="{{floorPlanUrl}}">
+    <image
+      class="floorplan-image"
+      src="{{floorPlanUrl}}"
+      mode="aspectFit"
+      style="width:100%;height:auto;"
+      bindtap="onImageTap"
+      bindload="onImageLoad"
+      binderror="onImageError"
+    />
+    <canvas
+      canvas-id="markerCanvas"
+      id="markerCanvas"
+      type="2d"
+      class="marker-canvas"
+      style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;"
+    ></canvas>
+  </view>
+
+  <view class="coord-card">
+    <text>像素坐标：({{pixelX}}, {{pixelY}})</text>
+    <text>米级坐标：({{realX}}, {{realY}})</text>
+    <text>scaleX={{scaleX}}</text>
+  </view>
+
+  <view class="btn-row">
+    <button class="btn primary" bindtap="scanWifiAtCurrentPoint">扫描当前WiFi</button>
+    <button class="btn" bindtap="collectBatchFive">同一位置批量采集5次</button>
+  </view>
+  <button class="btn success" bindtap="saveCurrentFingerprint">保存当前指纹</button>
+
+  <view class="wifi-list">
+    <view class="wifi-head">当前WiFi列表（rssi > -90）</view>
+    <view wx:if="{{wifiList.length}}">
+      <view class="wifi-item" wx:for="{{wifiList}}" wx:key="bssid">
+        <text class="bssid">{{item.bssid}}</text>
+        <text class="rssi">{{item.rssi}}</text>
+      </view>
+    </view>
+    <view wx:else class="empty">暂无扫描结果</view>
+  </view>
+
+  <view class="footer">
+    <text>已采集点数：{{collectedCount}}个</text>
+    <button class="btn warn" size="mini" bindtap="clearMarkers">清除本页标记</button>
+  </view>
+</view>

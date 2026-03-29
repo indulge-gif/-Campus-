@@ -98,3 +98,7 @@
   text-align: center;
   width: 100%;
 }
+
+.notice-wrap {
+  width: 100%;
+}

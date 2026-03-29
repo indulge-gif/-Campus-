@@ -1,0 +1,25 @@
+.placeholder-card {
+  width: 100%;
+  padding: 16rpx 20rpx;
+  border-radius: 18rpx;
+  background: rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
+}
+
+.line {
+  height: 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.line + .line {
+  margin-top: 12rpx;
+}
+
+.long {
+  width: 86%;
+}
+
+.short {
+  width: 68%;
+}

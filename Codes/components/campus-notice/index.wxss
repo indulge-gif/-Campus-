@@ -1,0 +1,23 @@
+.notice-card {
+  width: 100%;
+  padding: 16rpx 20rpx;
+  border-radius: 18rpx;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  box-sizing: border-box;
+}
+
+.notice-title {
+  display: block;
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 700;
+  margin-bottom: 6rpx;
+}
+
+.notice-text {
+  display: block;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 22rpx;
+  line-height: 1.45;
+}

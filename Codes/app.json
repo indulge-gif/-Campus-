@@ -1,5 +1,6 @@
 {
 "__usePrivacyCheck__": true,
+"lazyCodeLoading": "requiredComponents",
 "pages": [
   "pages/splash/splash",
   "pages/entry/entry",

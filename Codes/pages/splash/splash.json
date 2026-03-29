@@ -1,5 +1,11 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "campus-notice": "/components/campus-notice/index",
+    "campus-notice-placeholder": "/components/campus-notice-placeholder/index"
+  },
+  "componentPlaceholder": {
+    "campus-notice": "campus-notice-placeholder"
+  },
   "navigationStyle": "custom",
   "disableScroll": true
 }

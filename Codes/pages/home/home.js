@@ -130,6 +130,10 @@ Page({
     this.setData({ markers });
   },
 
+  onShow() {
+    this.setData({ suggestionsVisible: false });
+  },
+
   // 定位与权限处理
   onQuickTag(e) {
     const key = e.currentTarget.dataset.key || "";
@@ -143,6 +147,9 @@ Page({
   },
   toAbout() {
     wx.navigateTo({ url: '/pages/about/about' });
+  },
+  toCollector() {
+    wx.navigateTo({ url: '/pages/collector/collector' });
   },
   // 搜索与快捷标签
   onSearchTap() {
@@ -167,20 +174,14 @@ Page({
       return;
     }
 
-    if (suggestions.length === 1) {
-      const only = suggestions[0];
-      this.setData({ suggestions, suggestionsVisible: false, currentTargetLocation: only, poiCard: { visible: false, name: "", distance: "", anim: "" } });
-      wx.navigateTo({
-        url: `/pages/detail/detail?location=${encodeURIComponent(JSON.stringify(only))}`
-      });
-      return;
-    }
-
-    // 多结果：展开下拉（最多展示 8 条）
+    // 展开下拉（最多展示 8 条），即使只有 1 条也由用户手动点击进入
     this.setData({
       suggestions: suggestions.slice(0, 8),
       suggestionsVisible: true
     });
+    if (suggestions.length === 1) {
+      wx.showToast({ title: '找到1个结果，请点击进入', icon: 'none' });
+    }
   },
   onSearchInput(e) {
     const value = e.detail.value;
@@ -210,11 +211,42 @@ Page({
     });
   },
   onMarkerTap(e) {
-    const markerId = e.markerId;
-    if (markerId === 1) {
-      // 点击校区中心点：引导去地点集合（比“导航到学校”更明确）
+    const markerId = Number(e && e.markerId);
+    if (Number.isNaN(markerId)) return;
+
+    // 中心点 marker id 固定为 0，点击后进入地点集合页。
+    if (markerId === 0) {
       this.toLocations();
+      return;
     }
+
+    const picked = (this.data.locations || []).find((loc) => Number(loc && loc.id) === markerId);
+    if (!picked || picked.latitude == null || picked.longitude == null) {
+      wx.showToast({ title: '该地点缺少坐标', icon: 'none' });
+      return;
+    }
+
+    if (this.isSameTarget(picked.latitude, picked.longitude)) return;
+
+    this.ensureUserLocation((userLoc) => {
+      let distanceText = '距您未知';
+      if (userLoc) {
+        const meters = haversineMeters(userLoc.latitude, userLoc.longitude, picked.latitude, picked.longitude);
+        distanceText = meters >= 1000 ? `${(meters / 1000).toFixed(1)}公里` : `${meters}米`;
+      }
+
+      this.setData({
+        poiCard: { visible: true, name: picked.name || '所选地点', distance: distanceText, anim: 'slide-in' },
+        currentTargetLocation: {
+          id: picked.id,
+          name: picked.name,
+          latitude: picked.latitude,
+          longitude: picked.longitude,
+          image: picked.image,
+          description: picked.description,
+        }
+      });
+    });
   },
 
   // 地图事件（POI / regionchange）
@@ -264,7 +296,8 @@ Page({
       });
       return;
     }
-    wx.showToast({ title: '请先在地图选择地点', icon: 'none' });
+    // 无已选目标时，自动按“最近地点”流程兜底，避免用户感知为按钮失效。
+    this.goNearestLocation();
   },
   navigateToSchool() {
     // Home 的“最近地点”按钮复用这个处理函数，避免改 wxml 绑定
@@ -279,7 +312,11 @@ Page({
     }
 
     this.ensureUserLocation((userLoc) => {
-      if (!userLoc) return;
+      if (!userLoc) {
+        wx.showToast({ title: '定位不可用，请手动选地点', icon: 'none' });
+        this.toLocations();
+        return;
+      }
 
       let nearest = null;
       let nearestDistance = Number.POSITIVE_INFINITY;
@@ -312,18 +349,34 @@ Page({
         const authorized = res.authSetting && res.authSetting['scope.userLocation'];
 
         const getLoc = () => {
+          // 部分机型/环境会出现：地图已显示当前位置，但 gcj02 获取偶发失败。
+          // 这里增加 wgs84 回退，减少“已授权却提示定位失败”的误报。
+          const finishSuccess = ({ latitude, longitude }) => {
+            const loc = { latitude, longitude };
+            wx.hideLoading();
+            if (typeof callback === 'function') callback(loc);
+          };
+
+          const finishFail = (err) => {
+            wx.hideLoading();
+            const msg = String(err && err.errMsg || '');
+            const text = /auth deny|permission|scope.userLocation/i.test(msg)
+              ? '定位权限异常，请到设置页检查'
+              : '定位失败，请稍后重试';
+            wx.showToast({ title: text, icon: 'none' });
+            if (typeof callback === 'function') callback(null);
+          };
+
           wx.getLocation({
             type: 'gcj02',
-            success: ({ latitude, longitude }) => {
-              const loc = { latitude, longitude };
-              wx.hideLoading();
-              if (typeof callback === 'function') callback(loc);
-            },
+            success: finishSuccess,
             fail: () => {
-              wx.hideLoading();
-              wx.showToast({ title: '定位失败，请检查权限', icon: 'none' });
-              if (typeof callback === 'function') callback(null);
-            }
+              wx.getLocation({
+                type: 'wgs84',
+                success: finishSuccess,
+                fail: finishFail,
+              });
+            },
           });
         };
 

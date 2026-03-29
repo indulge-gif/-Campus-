@@ -1,4 +1,6 @@
 const { locations: LOCATION_SOURCE } = require('../../utils/locations.js');
+const DEFAULT_MARKER_ICON = 'cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/marker.png';
+const DEFAULT_MARKER_SIZE = 28;
 
 function haversineMeters(lat1, lon1, lat2, lon2) {
   const toRad = (d) => (d * Math.PI) / 180;
@@ -19,12 +21,18 @@ Page({
   },
   onLoad() {
     // 将 locations 转换为地图组件需要的 markers 格式
-    const markers = this.data.locations.map(item => ({
-      id: item.id,
-      latitude: item.latitude,
-      longitude: item.longitude,
-      ...item.marker // 展开 marker 配置（包含 iconPath 和 callout）
-    }));
+    const markers = this.data.locations.map(item => {
+      const markerPart = item.marker || {};
+      return {
+        id: item.id,
+        latitude: item.latitude,
+        longitude: item.longitude,
+        iconPath: markerPart.iconPath || item.iconPath || DEFAULT_MARKER_ICON,
+        width: item.width || markerPart.width || DEFAULT_MARKER_SIZE,
+        height: item.height || markerPart.height || DEFAULT_MARKER_SIZE,
+        ...markerPart // 展开 marker 配置（包含 iconPath 和 callout）
+      };
+    });
     
     // 更新数据，触发页面渲染
     this.setData({

@@ -39,20 +39,19 @@
 
     <view class="map-fab-group">
       <button class="fab" bindtap="onLocateMe">回到我的位置</button>
-      <button class="fab fab-primary" bindtap="onStartNav">开始导航</button>
     </view>
 
     <view class="floating-nav">
       <view class="nav-item" bindtap="toAbout">
-        <view class="nav-icon campus"></view>
+        <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/info.png" class="nav-icon" />
         <text>校园概况</text>
       </view>
       <view class="nav-item" bindtap="navigateToSchool">
-        <view class="nav-icon route"></view>
+        <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/nav.png" class="nav-icon" />
         <text>路线导航</text>
       </view>
       <view class="nav-item" bindtap="toLocations">
-        <view class="nav-icon pin"></view>
+        <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/more.png" class="nav-icon" />
         <text>常用地点</text>
       </view>
     </view>

@@ -2,7 +2,7 @@ const { locations: LOCATION_SOURCE } = require('../../utils/locations.js');
 const { buildClassroomSuggestions, mergeSuggestions } = require('../../utils/classroomSearch.js');
 
 const DEFAULT_MARKER_SIZE = 28;
-const DEFAULT_MARKER_ICON = 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/marker.png';
+const DEFAULT_MARKER_ICON = 'cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/marker.png';
 
 function haversineMeters(lat1, lon1, lat2, lon2) {
   const toRad = (d) => (d * Math.PI) / 180;

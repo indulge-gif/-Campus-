@@ -1,7 +1,7 @@
 # Copilot Instructions for Campus Project
 
 ## Project Overview
-This repository contains the code for the WeChat Mini Program "民大Campus导航". The project is designed to provide navigation and related functionalities for users within the campus environment.
+This repository contains the code for the WeChat Mini Program "知行导览". The project is designed to provide navigation and related functionalities for users within the campus environment.
 
 ## Project Structure
 The project is organized as follows:

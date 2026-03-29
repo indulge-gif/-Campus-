@@ -1,5 +1,6 @@
 {
 "__usePrivacyCheck__": true,
+"lazyCodeLoading": "requiredComponents",
 "pages": [
   "pages/splash/splash",
   "pages/entry/entry",
@@ -15,12 +16,6 @@
   "navigationBarTitleText": "中央民族大学",
   "navigationBarTextStyle": "white"
 },
-  "plugins": {
-    "leafletwx": {
-      "version": "1.0.21",
-      "provider": "wx3fe0bd34d4615f50"
-    }
-  },
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于导航功能"

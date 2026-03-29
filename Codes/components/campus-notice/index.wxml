@@ -1,0 +1,4 @@
+<view class="notice-card">
+  <text class="notice-title">温馨提示</text>
+  <text class="notice-text">首次渲染时该区域会先显示占位组件，随后替换为真实组件。</text>
+</view>

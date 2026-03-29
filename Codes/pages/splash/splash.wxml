@@ -10,6 +10,7 @@
     <view class="actions">
       <button class="cta" bindtap="navigateToHome" hover-class="cta-active">进入校园</button>
       <view class="countdown">{{countdownText}}</view>
+      <campus-notice />
     </view>
   </view>
 </view>

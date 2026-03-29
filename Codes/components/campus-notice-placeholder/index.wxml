@@ -1,0 +1,4 @@
+<view class="placeholder-card">
+  <view class="line long"></view>
+  <view class="line short"></view>
+</view>

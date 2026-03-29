@@ -21,19 +21,88 @@
   />
 
   <view class="detail-card">
+    <view class="permission-card" wx:if="{{isClassroomDestination}}">
+      <text class="permission-title">权限与设备状态</text>
+      <view class="permission-row">
+        <text class="permission-label">定位权限</text>
+        <text class="permission-value {{permissionLocationStatus === '已开启' ? 'ok' : 'bad'}}">{{permissionLocationStatus}}</text>
+      </view>
+      <view class="permission-row">
+        <text class="permission-label">传感器</text>
+        <text class="permission-value {{permissionSensorStatus === '可用' ? 'ok' : 'bad'}}">{{permissionSensorStatus}}</text>
+      </view>
+      <button class="permission-fix-btn" bindtap="fixPermissions">一键修复</button>
+    </view>
+
     <view class="description" wx:if="{{description}}">
       <text>{{description}}</text>
+    </view>
+
+    <view class="indoor-explorer" wx:if="{{indoorExplorerVisible}}">
+      <text class="indoor-explorer-title">{{indoorExplorerBuildingName}} 楼层教室定位</text>
+      <view class="indoor-explorer-row">
+        <text class="indoor-explorer-label">当前楼层</text>
+        <picker mode="selector" range="{{indoorExplorerFloorOptions}}" value="{{indoorExplorerFloorIndex}}" bindchange="onExplorerFloorChange">
+          <view class="picker-view">{{indoorExplorerFloorOptions[indoorExplorerFloorIndex] || '请选择楼层'}}</view>
+        </picker>
+      </view>
+      <view class="indoor-buttons">
+        <button class="mini-btn primary" bindtap="previewSelectedFloor">查看本层平面图</button>
+      </view>
     </view>
 
     <view class="floor-plan-card" wx:if="{{floorPlanImage || floorPlanHint}}">
       <text class="floor-plan-title">楼层平面图</text>
       <text class="floor-plan-sub" wx:if="{{buildingKey && floor}}">{{buildingKey}} {{floor}}层 {{roomNo}}号教室</text>
-      <image
-        wx:if="{{floorPlanImage}}"
-        src="{{floorPlanImage}}"
-        class="floor-plan-image"
-        mode="widthFix"
-      />
+      <view class="route-canvas-wrap" wx:if="{{floorPlanImage}}">
+        <image
+          src="{{floorPlanRenderImage || floorPlanImage}}"
+          class="floor-plan-image-base"
+          mode="widthFix"
+          bindload="onFloorPlanLoad"
+          binderror="onFloorPlanError"
+        />
+        <canvas
+          canvas-id="routeCanvas"
+          class="route-canvas"
+          style="height: {{floorPlanRenderHeight}}px;"
+        ></canvas>
+      </view>
+      <view class="route-legend" wx:if="{{indoorRouteReady}}">
+        <text class="legend-item">红线：推荐路线</text>
+        <text class="legend-item">黄圈绿点(起)：起始楼梯</text>
+        <text class="legend-item">淡绿点：其他楼梯</text>
+        <text class="legend-item">橙点：目标教室区域</text>
+        <text class="legend-item">蓝点+箭头：实时位置与朝向</text>
+      </view>
+      <view class="indoor-live-panel" wx:if="{{indoorRouteReady}}">
+        <view class="indoor-status-row">
+          <text class="indoor-status">状态：{{indoorStatusText}}</text>
+          <text class="indoor-metrics">步数 {{indoorStepCount}} | 航向 {{indoorHeadingDeg}}°</text>
+          <text class="indoor-metrics">免测模式：{{noMeasureModeEnabled ? '已开启' : '已关闭'}} | {{noMeasureProfileText}}</text>
+        </view>
+        <view class="indoor-buttons">
+          <button class="mini-btn" bindtap="calibrateAtStair">校准当前楼梯点</button>
+          <button class="mini-btn primary" bindtap="toggleIndoorRealtimeNav">{{indoorRealtimeEnabled ? '停止实时导航' : '开始实时导航'}}</button>
+        </view>
+        <view class="indoor-buttons">
+          <button class="mini-btn" bindtap="applyNoMeasureLearning">到达并学习</button>
+          <button class="mini-btn" bindtap="resetNoMeasureLearning">重置本楼学习</button>
+        </view>
+        <view class="offset-tools">
+          <text class="offset-text">朝向修正：{{headingOffsetDeg}}°</text>
+          <view class="offset-btns">
+            <button class="tiny-btn" data-delta="-15" bindtap="adjustHeadingOffset">-15°</button>
+            <button class="tiny-btn" data-delta="15" bindtap="adjustHeadingOffset">+15°</button>
+          </view>
+        </view>
+      </view>
+      <view class="route-steps" wx:if="{{indoorGuideSteps.length}}">
+        <view class="route-step" wx:for="{{indoorGuideSteps}}" wx:key="*this">
+          <text>{{index + 1}}. {{item}}</text>
+        </view>
+      </view>
+      <text class="floor-plan-hint route-error" wx:if="{{indoorRouteError}}">{{indoorRouteError}}</text>
       <text class="floor-plan-hint" wx:if="{{floorPlanHint}}">{{floorPlanHint}}</text>
     </view>
 
@@ -47,7 +116,8 @@
       <text wx:if="{{walkMinutes !== null}}">预计时间：步行约{{walkMinutes}}分钟</text>
       <text wx:else>预计时间：暂不可用</text>
     </view>
+    <view class="arrival-hint" wx:if="{{arrivingHint}}">{{arrivingHint}}</view>
 
-    <button class="nav-button" bindtap="showRoute">从当前位置导航</button>
+    <button class="nav-button" bindtap="showRoute">{{isClassroomDestination ? ((distance !== null && distance <= 35) ? '刷新室内路线' : '先导航到目标楼栋') : '从当前位置导航'}}</button>
   </view>
 </view>

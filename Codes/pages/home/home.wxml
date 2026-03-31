@@ -46,9 +46,9 @@
         <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/info.png" class="nav-icon" />
         <text>校园概况</text>
       </view>
-      <view class="nav-item" bindtap="navigateToSchool">
+      <view class="nav-item" bindtap="toGuess">
         <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/nav.png" class="nav-icon" />
-        <text>路线导航</text>
+        <text>猜你想去</text>
       </view>
       <view class="nav-item" bindtap="toLocations">
         <image src="cloud://cloud1-4gh72aev1c85874d.636c-cloud1-4gh72aev1c85874d-1360566409/img/more.png" class="nav-icon" />

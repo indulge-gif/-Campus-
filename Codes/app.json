@@ -5,6 +5,7 @@
   "pages/splash/splash",
   "pages/entry/entry",
   "pages/home/home",
+  "pages/guess/guess",
   "pages/locations/locations",
   "pages/about/about",
   "pages/advancedSearch/advancedSearch",

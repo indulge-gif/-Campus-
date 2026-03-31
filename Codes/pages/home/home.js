@@ -151,6 +151,9 @@ Page({
   toCollector() {
     wx.navigateTo({ url: '/pages/collector/collector' });
   },
+  toGuess() {
+    wx.navigateTo({ url: '/pages/guess/guess' });
+  },
   // 搜索与快捷标签
   onSearchTap() {
     const query = this.data.searchQuery.trim();
